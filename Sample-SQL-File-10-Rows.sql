@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `last_name` varchar(50) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `status` tinyint(10) DEFAULT NULL,
+  -- `status` tinyint(10) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10001 ;
 
