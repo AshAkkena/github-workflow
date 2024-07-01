@@ -28,10 +28,11 @@ jobs:
         id: check_sql_changes
         run: |
           files=$(git diff --name-only  ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
-          echo "::set-output name=sql_changed::$(echo "$files" | grep -E '\.sql$')"
+          echo "sql_changed=$(echo "$files" | grep -E '\.sql$')" >> $GITHUB_ENV
+
 
       - name: Send notification to Slack
-        if: steps.check_sql_changes.outputs.sql_changed != ''
+        if: env.sql_changed != ''
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
