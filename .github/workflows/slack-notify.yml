@@ -1,8 +1,8 @@
 name: Notify Slack on SQL Changes
 
 permissions:
-  id-token: write
-  contents: read
+  id-token: read | write
+  contents: read | write
 
 on:
   pull_request:
@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
 
       - name: Check for SQL file changes
         id: check_sql_changes
