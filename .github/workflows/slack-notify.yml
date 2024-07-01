@@ -1,8 +1,8 @@
 name: Notify Slack on SQL Changes
 
 permissions:
-  id-token: read 
-  contents: write
+  id-token: write
+  contents: read
 
 on:
   pull_request:
