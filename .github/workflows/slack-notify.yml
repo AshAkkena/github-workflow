@@ -1,5 +1,9 @@
 name: Notify Slack on SQL Changes
 
+permissions:
+  id-token: write
+  contents: read
+
 on:
   pull_request:
     types: [opened, synchronize, closed, reopened]
