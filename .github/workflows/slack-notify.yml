@@ -18,12 +18,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.sha }}
 
       - name: Check for SQL file changes
         id: check_sql_changes
         run: |
-          files=$(git diff --name-only  ${{ github.event.pull_request.base.sha }}..${{ github.sha }})
+          files=$(git diff --name-only  ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
           echo "::set-output name=sql_changed::$(echo "$files" | grep -E '\.sql$')"
 
       - name: Send notification to Slack
