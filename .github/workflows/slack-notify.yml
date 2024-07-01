@@ -1,0 +1,24 @@
+name: Notify Slack on SQL Changes
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed, reopened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for SQL file changes
+        id: check_sql_changes
+        run: |
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "::set-output name=sql_changed::$(echo "$files" | grep -E '\.sql$')"
+
+      - name: Send notification to Slack
+        if: steps.check_sql_changes.outputs.sql_changed != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "PR #${{ github.event.number }} with SQL changes: https://github.com/${{ github.repository }}/pull/${{ github.event.number }}"
+          }' $SLACK_WEBHOOK_URL
