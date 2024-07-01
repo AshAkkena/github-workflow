@@ -3,6 +3,7 @@ name: Notify Slack on SQL Changes
 on:
   pull_request:
     types: [opened, synchronize, closed, reopened]
+  workflow_dispatch:
 
 jobs:
   notify:
