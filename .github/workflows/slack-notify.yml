@@ -10,4 +10,4 @@ on:
 jobs:
   pr-event:
     uses: Ashakkena/remoteworkflow/.github/workflows/test.yml@main
-    secrets: inherit
+
