@@ -6,6 +6,12 @@ on:
       - '*'
     types: [opened, synchronize, closed, reopened]
   workflow_dispatch:
+    inputs:
+      environments:
+        required: true
+        options:
+          - dev
+          - int
 
 jobs:
   pr-event:
